@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>项目启动成功</h2>
+    <script>
+      // 原生发送网络请求：xhr/fetch
+      // 1.xhr
+      const xhr = new XMLHttpRequest()
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          console.log(JSON.parse(xhr.responseText))
+        }
+      }
+      xhr.open('get', 'http://localhost:8000/users/list')
+      xhr.send()
+
+      // 2.fetch
+      fetch('http://localhost:8000/users/list').then(async res => {
+        const result = await res.json()
+        console.log(result)
+      })
+
+      // 1.直接在live server中打开：默认是127.0.0.1:5500  port不一样 会产生跨域问题
+      // 2.通过koa-static来部署index.html 将静态资源和api接口部署到同一台服务器上 然后直接通过localhost:8000打开 不存在跨域
+
+    </script>
+
+  </body>
+</html>
